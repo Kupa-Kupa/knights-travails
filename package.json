@@ -1,0 +1,13 @@
+{
+  "name": "knights-travails",
+  "version": "1.0.0",
+  "description": "",
+  "main": "knights-travails.js",
+  "scripts": {
+    "test": "jest --verbose"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
