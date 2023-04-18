@@ -8,7 +8,10 @@ https://www.theodinproject.com/lessons/javascript-knights-travails
 
 #### What was I trying to do?
 
+### Map()
+
+#### What was I trying to do?
+
 ## ToDO:
 
-- generate board
-- build knightMoves function
+- clean up code

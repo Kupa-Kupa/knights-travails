@@ -68,6 +68,7 @@ function knightMoves(start, end) {
 
   // paths only required if i want to see all of them
   //   const paths = [];
+  let moveCount = 0;
   const visited = new Set();
   const queue = [];
 
@@ -76,13 +77,23 @@ function knightMoves(start, end) {
   while (queue.length !== 0) {
     let [current, path] = queue.shift();
     // console.log('current', current);
-    visited.add(current);
 
-    if (current === destination) {
+    // i don't want to count the starting square when the destination is
+    // the starting square, i.e. [0,0] => [0,0]
+    if (!(moveCount === 0 && current === destination)) {
+      visited.add(current);
+    }
+
+    moveCount++;
+
+    if (current === destination && moveCount > 1) {
       // path should be added to array of possible paths if i want to see them all not just one
       //   paths.push(path);
       console.log(`You made it in ${path.length - 1} moves! Here's your path:`);
       path.forEach((square) => console.log(`[${square}]`));
+      console.log('');
+      //   console.log('visited:', visited);
+      //   console.log('');
       return;
     }
 
@@ -102,4 +113,6 @@ function knightMoves(start, end) {
   //   paths.forEach((element) => console.log(element));
 }
 
-knightMoves([0, 0], [0, 1]);
+// knightMoves([0, 0], [0, 1]);
+
+export { knightMoves };
