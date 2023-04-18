@@ -1,5 +1,5 @@
 function generateChessBoard() {
-  console.log('start generateChessBoard');
+  //   console.log('start generateChessBoard');
 
   // create map for chessboard
   const chessBoard = new Map();
@@ -39,7 +39,8 @@ function generateChessBoard() {
 
           //   console.log('validMoves:', validMove);
 
-          possibleMoves.push(validMove);
+          // need to be a string to work... TBD explanation of why (need string for comparison later)
+          possibleMoves.push(String(validMove));
         }
       }
 
@@ -53,8 +54,52 @@ function generateChessBoard() {
   //   for (const keyVal of chessBoard) {
   //     console.log(keyVal);
   //   }
+
+  return chessBoard;
 }
 
-generateChessBoard();
+function knightMoves(start, end) {
+  const chessBoard = generateChessBoard();
 
-function knightMoves(start, end) {}
+  const origin = String(start);
+  console.log('origin', origin);
+  const destination = String(end);
+  console.log('destination', destination);
+
+  // paths only required if i want to see all of them
+  //   const paths = [];
+  const visited = new Set();
+  const queue = [];
+
+  queue.push([origin, [origin]]);
+
+  while (queue.length !== 0) {
+    let [current, path] = queue.shift();
+    // console.log('current', current);
+    visited.add(current);
+
+    if (current === destination) {
+      // path should be added to array of possible paths if i want to see them all not just one
+      //   paths.push(path);
+      console.log(`You made it in ${path.length - 1} moves! Here's your path:`);
+      path.forEach((square) => console.log(`[${square}]`));
+      return;
+    }
+
+    const possibleMoves = chessBoard.get(current);
+    // console.log(possibleMoves);
+
+    for (const move of possibleMoves) {
+      //   console.log('move', move);
+      if (!visited.has(move)) {
+        queue.push([move, [...path, move]]);
+      }
+    }
+  }
+
+  // not require since i only care about the shorted path:
+  //   console.log(`Fastest Routes from ${start} to ${end}`);
+  //   paths.forEach((element) => console.log(element));
+}
+
+knightMoves([0, 0], [0, 1]);
